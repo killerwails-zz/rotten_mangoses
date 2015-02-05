@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Podcast::Application.config.secret_key_base = '83fa18493fad2633c42fc85d0e0b6dc8108d3aff81d44d8b810fa1f8d0d918f47c5340f9cdfd37b5a4f43f44dfd01056d5d45c51385e39ffe2ddcb3b9224e8eb'
+Podcast::Application.config.secret_key_base = '8afabaf8d77da661491471fa064ade4cd308e51dba2f566dae90bcb3731f7129047fee9d9cddd02c6f7ea8ea7e70ccf93f92e3cff4f82c9d5d003ba36c156064'
