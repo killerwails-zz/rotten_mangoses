@@ -1,0 +1,8 @@
+<h1> SFNAPCPS! </h1>
+<% @episodes.each do |episode| %>
+  <%= link_to image_tag(episode.poster_image_url), episode_path(episode) %>
+  <h2><%= link_to episode.title, episode_path(episode) %></h2>
+  <p><%= episode.description %></p>
+  <h4> <%= link_to release_date %> | <%= episode.runtime_in_minutes %> minutes</h4>
+  <hr>
+<% end %>
