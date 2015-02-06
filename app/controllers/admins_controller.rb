@@ -1,5 +1,9 @@
 class AdminsController < ApplicationController
   
+  namespace :adim do
+    resources :episodes   
+  end
+
   def new
     @admin = Admin.new
   end
