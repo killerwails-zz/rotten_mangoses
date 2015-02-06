@@ -1,7 +1,9 @@
 class Episode < ActiveRecord::Base
+  
+  has_attached_file :track
+  has_attached_file :avatar :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
 
-  validates :title,:description,:poster_image_url,:release_date,
-    presence: true
+  validates :title,:description,:release_date, presence: true
 
   validates :runtime_in_minutes,
     numericality: { only_integer: true }

@@ -1,0 +1,22 @@
+body {
+  background-color: #000000;
+  background: url("/assets/background.png") no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 980px;
+}
+
+section button {
+  margin-top: 587px;
+  background:none;
+  border:none;
+  box-shadow:none;
+  color:#27C5FB;
+  font-family: 'Butcherman', cursive; 
+}
+
+#leftpaw {
+  margin-top: 560px; 
+}
