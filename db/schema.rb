@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205075817) do
+ActiveRecord::Schema.define(version: 20150206214055) do
 
   create_table "add_attachment_to_episodes", force: true do |t|
     t.string   "avatar_file_name"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150205075817) do
   end
 
   create_table "episodes", force: true do |t|
-    t.integer  "admin_id"
+    t.integer  "user_id"
     t.string   "title"
     t.text     "description"
     t.integer  "runtime_in_minutes"
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 20150205075817) do
     t.datetime "updated_at"
   end
 
-  add_index "episodes", ["admin_id"], name: "index_episodes_on_admin_id"
+  add_index "episodes", ["user_id"], name: "index_episodes_on_user_id"
+
+  create_table "suggestions", force: true do |t|
+    t.integer  "episode_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suggestions", ["episode_id"], name: "index_suggestions_on_episode_id"
 
 end
