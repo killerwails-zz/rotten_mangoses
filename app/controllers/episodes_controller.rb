@@ -21,7 +21,7 @@ class EpisodesController < ApplicationController
     @episodes = Episode.new(episode_params)
 
       if @episode.save
-        redirect_to episode_path
+        redirect_to episode_path, notice:"#{episode.title} was submitted successfully!"
       else
         render :new
       end

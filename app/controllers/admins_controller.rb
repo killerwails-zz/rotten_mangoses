@@ -9,7 +9,7 @@ class AdminsController < ApplicationController
 
     if @admin.save
       session[:admin_id] = @admin.id # auto log in
-      redirect_to movies_path
+      redirect_to episodes_path, notice:"Welcome aboard!"
     else
       render :new
     end

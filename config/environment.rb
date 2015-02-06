@@ -4,4 +4,4 @@ require File.expand_path('../application', __FILE__)
 # Initialize the Rails application.
 Podcast::Application.initialize!
 
-require 'pry' if development?
+# require 'pry' if Rails.env.development?

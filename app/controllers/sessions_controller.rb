@@ -8,10 +8,16 @@ class SessionsController < ApplicationController
 
     if admin && admin.authenticate(params[:password])
       session[:admin_id] = admin.id
-      redirect_to movies_path
+      redirect_to movies_pathnotice: "Welcome back!"
     else
+      flash.now[:alert] = "Log in failed..."
       render :new
     end
+  end
+
+  def destroy
+    session[:admin_id] = nil
+    redirect_to movies_path, notice: "Adios!"
   end
 
 end
