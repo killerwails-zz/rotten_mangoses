@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150205075817) do
   end
 
   create_table "episodes", force: true do |t|
-    t.integer  "admin_id"
+    t.integer  "user_id"
     t.string   "title"
     t.text     "description"
     t.integer  "runtime_in_minutes"
@@ -47,6 +47,6 @@ ActiveRecord::Schema.define(version: 20150205075817) do
     t.datetime "updated_at"
   end
 
-  add_index "episodes", ["admin_id"], name: "index_episodes_on_admin_id"
+  add_index "episodes", ["user_id"], name: "index_episodes_on_user_id"
 
 end
