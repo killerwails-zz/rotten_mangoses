@@ -17,7 +17,7 @@ class EpisodesController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @admin = Admin.new(admin_params)
     @episodes = Episode.new(episode_params)
 
       if @episode.save
@@ -50,8 +50,8 @@ class EpisodesController < ApplicationController
     (:title, :description :runtime_in_minutes :poster_image_url :release_date)
   end
 
-  def user_params
-    params.require(:user).permit(:avatar)
+  def admin_params
+    params.require(:admin).permit(:avatar)
   end
 
 

@@ -1,7 +1,7 @@
 
 <%= link_to "Home", episode_path(@episode) %>
 
-<h2>Edit this episode.</h2>
+<h2>Upload episode.</h2>
 <%= form_for @episode do |f| %>
 <% if @episode.errors.any? %>
     <div>
@@ -26,8 +26,7 @@
     <%= f.number_field "runtime_in_minutes" %>
   </div>
   <div>
-    <%= f.label "poster_image_url" %><br>
-    <%= f.text_field "poster_image_url" %>
+    <%= f.label "Thumbnail Upload" %><br>
   </div>
   <div>
     <%= f.label "description" %><br>

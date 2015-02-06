@@ -1,6 +1,31 @@
 <%= link_to "Home", episodes_path %><br/>
 
-<%= link_to image_tag(@episode.poster_image_url), episode_path(@episode) %>
+
+<%= link_to image_tag(<%= image_tag @admin.avatar.url(:thumb) %>), episode_path(@episode) %>
 <h2><%= @episode.title %> (<%= link_to "edit", edit_episode_path(@episode) %>, <%= link_to "delete", episode_path(@episode), method: :delete, confirm: "Are You sure???" %>)</h2>
 <h4> <%= @episode.release_date %> | <%= @episode.runtime_in_minutes %> minutes</h4>
 <p><%= @episode.description %></p>
+
+<div id="sm2-container">
+  <script src="/soundmanager2/script/soundmanager2.js"></script>
+  <script>
+  soundManager.setup({
+    url: '/soundmanager2/swf/soundmanager2.swf',
+    flashVersion: 9, 
+    preferFlash: false,
+    onready: function() {
+      var mySound = soundManager.createSound({
+        id: 'episode',
+        url: '/path/to/an.mp3'
+      });
+      mySound.play();
+       stream: true,
+       volume: 100, 
+       multiShot: true 
+    },
+    ontimeout: function() {
+      console.log("Hrmm, the player could not start")
+    }
+  });
+  </script>
+</div>  
