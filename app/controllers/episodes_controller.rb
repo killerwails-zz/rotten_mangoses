@@ -47,7 +47,7 @@ class EpisodesController < ApplicationController
   #need to add file column name
   def episode_params
     params.require(:episode).permit
-    (:title, :description :runtime_in_minutes :poster_image_url :release_date)
+    (:title, :description, :runtime_in_minutes, :poster_image_url, :release_date)
   end
 
   def admin_params
