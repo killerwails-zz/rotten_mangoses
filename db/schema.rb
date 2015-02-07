@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205075817) do
+ActiveRecord::Schema.define(version: 20150207004747) do
 
   create_table "add_type_to_episodes", force: true
     t.string  "type"
@@ -50,8 +50,18 @@ ActiveRecord::Schema.define(version: 20150205075817) do
     t.datetime "track_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "podcast_type"
   end
 
   add_index "episodes", ["user_id"], name: "index_episodes_on_user_id"
+
+  create_table "suggestions", force: true do |t|
+    t.integer  "episode_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suggestions", ["episode_id"], name: "index_suggestions_on_episode_id"
 
 end

@@ -8,10 +8,18 @@
   <body>
     <div class="container">
       <section>
-        <button type="button" class="btn btn-lg active col-md-2 col-md-offset-6" href="#clear">VITA</button>
-        
-        <button id="leftpaw" type="button" class="btn btn-lg active col-md-2 col-md-offset-0" href="#clear">SFNAPCPS</button>
+       <%= link_to 'VITA', episodes_path(:type=>'vita'),class: "vita btn btn-lg active col-md-2 col-md-offset-6"  %> 
+       <%= link_to 'SFNAPCPS', episodes_path,class: "vita btn btn-lg active col-md-2 col-md-offset-6"  %>
+       <!--  <button id="leftpaw" type="button" class="btn btn-lg active col-md-2 col-md-offset-0" href="#clear">SFNAPCPS</button> -->
       </section>
    </div>
   </body>
 </html>
+
+// <script type="text/javascript">
+  
+// $('#leftpaw').click(function(){
+//   console.log('hello');
+// })
+
+// </script>

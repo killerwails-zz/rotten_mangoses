@@ -107,7 +107,7 @@ function SoundManager(smURL, smID) {
     'onresume': null,         // callback for "resume" (pause toggle)
     'whileplaying': null,     // callback during play (position update)
     'onposition': null,       // object containing times and function callbacks for positions of interest
-    'onstop': null,           // callback for "admin stop"
+    'onstop': null,           // callback for "user stop"
     'onfailure': null,        // callback function for when playing fails
     'onfinish': null,         // callback function for "sound finished playing"
     'multiShot': true,        // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
@@ -274,7 +274,7 @@ function SoundManager(smURL, smID) {
    */
 
   var SMSound,
-  sm2 = this, globalHTML5Audio = null, flash = null, sm = 'soundManager', smc = sm + ': ', h5 = 'HTML5::', id, ua = navigator.adminAgent, wl = window.location.href.toString(), doc = document, doNothing, setProperties, init, fV, on_queue = [], debugOpen = true, debugTS, didAppend = false, appendSuccess = false, didInit = false, disabled = false, windowLoaded = false, _wDS, wdCount = 0, initComplete, mixin, assign, extraOptions, addOnEvent, processOnEvents, initadminOnload, delayWaitForEI, waitForEI, rebootIntoHTML5, setVersionInfo, handleFocus, strings, initMovie, preInit, domContentLoaded, winOnLoad, didDCLoaded, getDocument, createMovie, catchError, setPolling, initDebug, debugLevels = ['log', 'info', 'warn', 'error'], defaultFlashVersion = 8, disableObject, failSafely, normalizeMovieURL, oRemoved = null, oRemovedHTML = null, str, flashBlockHandler, getSWFCSS, swfCSS, toggleDebug, loopFix, policyFix, complain, idCheck, waitingForEI = false, initPending = false, startTimer, stopTimer, timerExecute, h5TimerCount = 0, h5IntervalTimer = null, parseURL, messages = [],
+  sm2 = this, globalHTML5Audio = null, flash = null, sm = 'soundManager', smc = sm + ': ', h5 = 'HTML5::', id, ua = navigator.userAgent, wl = window.location.href.toString(), doc = document, doNothing, setProperties, init, fV, on_queue = [], debugOpen = true, debugTS, didAppend = false, appendSuccess = false, didInit = false, disabled = false, windowLoaded = false, _wDS, wdCount = 0, initComplete, mixin, assign, extraOptions, addOnEvent, processOnEvents, initUserOnload, delayWaitForEI, waitForEI, rebootIntoHTML5, setVersionInfo, handleFocus, strings, initMovie, preInit, domContentLoaded, winOnLoad, didDCLoaded, getDocument, createMovie, catchError, setPolling, initDebug, debugLevels = ['log', 'info', 'warn', 'error'], defaultFlashVersion = 8, disableObject, failSafely, normalizeMovieURL, oRemoved = null, oRemovedHTML = null, str, flashBlockHandler, getSWFCSS, swfCSS, toggleDebug, loopFix, policyFix, complain, idCheck, waitingForEI = false, initPending = false, startTimer, stopTimer, timerExecute, h5TimerCount = 0, h5IntervalTimer = null, parseURL, messages = [],
   canIgnoreFlash, needsFlash = null, featureCheck, html5OK, html5CanPlay, html5Ext, html5Unload, domContentLoadedIE, testHTML5, event, slice = Array.prototype.slice, useGlobalHTML5Audio = false, lastGlobalHTML5URL, hasFlash, detectFlash, badSafariFix, html5_events, showSupport, flushMessages, wrapCallback, idCounter = 0,
   is_iDevice = ua.match(/(ipad|iphone|ipod)/i), isAndroid = ua.match(/android/i), isIE = ua.match(/msie/i), isWebkit = ua.match(/webkit/i), isSafari = (ua.match(/safari/i) && !ua.match(/chrome/i)), isOpera = (ua.match(/opera/i)),
   mobileHTML5 = (ua.match(/(mobile|pre\/|xoom)/i) || is_iDevice || isAndroid),
@@ -350,7 +350,7 @@ function SoundManager(smURL, smID) {
 
     assign(options);
 
-    // special case 1: "Late setup". SM2 loaded normally, but admin didn't assign flash URL eg., setup({url:...}) before SM2 init. Treat as delayed init.
+    // special case 1: "Late setup". SM2 loaded normally, but user didn't assign flash URL eg., setup({url:...}) before SM2 init. Treat as delayed init.
 
     if (options) {
 
@@ -358,7 +358,7 @@ function SoundManager(smURL, smID) {
         sm2.beginDelayedInit();
       }
 
-      // special case 2: If lazy-loading SM2 (DOMContentLoaded has already happened) and admin calls setup() with url: parameter, try to init ASAP.
+      // special case 2: If lazy-loading SM2 (DOMContentLoaded has already happened) and user calls setup() with url: parameter, try to init ASAP.
 
       if (!didDCLoaded && options.url !== _undefined && doc.readyState === 'complete') {
         setTimeout(domContentLoaded, 1);
@@ -999,7 +999,7 @@ function SoundManager(smURL, smID) {
 
     // fire "complete", despite fail
     initComplete(bNoDisable);
-    event.remove(window, 'load', initadminOnload);
+    event.remove(window, 'load', initUserOnload);
 
     return true;
 
@@ -3858,7 +3858,7 @@ console.log('updated metadata', s.metadata);
       sm2._wD(this._s.id + ': HTML5 error, code ' + this.error.code);
       /**
        * HTML5 error codes, per W3C
-       * Error 1: Client aborted download at admin's request.
+       * Error 1: Client aborted download at user's request.
        * Error 2: Network error after load started.
        * Error 3: Decoding issue.
        * Error 4: Media (audio file) not supported.
@@ -4273,7 +4273,7 @@ console.log('updated metadata', s.metadata);
     swf404: smc + 'Verify that %s is a valid path.',
     tryDebug: 'Try ' + sm + '.debugFlash = true for more security details (output goes to SWF.)',
     checkSWF: 'See SWF output for more debug info.',
-    localFail: smc + 'Non-HTTP page (' + doc.location.protocol + ' URL?) Review Flash player security settings for this special case:\nhttp://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html\nMay need to add/allow path, eg. c:/sm2/ or /admins/me/sm2/',
+    localFail: smc + 'Non-HTTP page (' + doc.location.protocol + ' URL?) Review Flash player security settings for this special case:\nhttp://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html\nMay need to add/allow path, eg. c:/sm2/ or /users/me/sm2/',
     waitFocus: smc + 'Special case: Waiting for SWF to load with window focus...',
     waitForever: smc + 'Waiting indefinitely for Flash (will recover if unblocked)...',
     waitSWF: smc + 'Waiting for 100% SWF load...',
@@ -4422,7 +4422,7 @@ console.log('updated metadata', s.metadata);
       if (smURL.match(/\.swf(\?.*)?$/i)) {
         urlParams = smURL.substr(smURL.toLowerCase().lastIndexOf('.swf?') + 4);
         if (urlParams) {
-          // assume admin knows what they're doing
+          // assume user knows what they're doing
           return smURL;
         }
       } else if (smURL.lastIndexOf('/') !== smURL.length - 1) {
@@ -4655,7 +4655,7 @@ console.log('updated metadata', s.metadata);
     if (!sm2.ok()) {
 
       if (needsFlash) {
-        // make the movie more visible, so admin can fix
+        // make the movie more visible, so user can fix
         sm2.oMC.className = getSWFCSS() + ' ' + css.swfDefault + ' ' + (p === null?css.swfTimedout:css.swfError);
         sm2._wD(name + ': ' + str('fbTimeout') + (p ? ' (' + str('fbLoaded') + ')' : ''));
       }
@@ -4758,7 +4758,7 @@ console.log('updated metadata', s.metadata);
 
   };
 
-  initadminOnload = function() {
+  initUserOnload = function() {
 
     window.setTimeout(function() {
 
@@ -4768,7 +4768,7 @@ console.log('updated metadata', s.metadata);
 
       processOnEvents();
 
-      // call admin-defined "onload", scoped to window
+      // call user-defined "onload", scoped to window
 
       if (typeof sm2.onload === 'function') {
         _wDS('onload', 1);
@@ -4777,7 +4777,7 @@ console.log('updated metadata', s.metadata);
       }
 
       if (sm2.waitForWindowLoad) {
-        event.add(window, 'load', initadminOnload);
+        event.add(window, 'load', initUserOnload);
       }
 
     },1);
@@ -5430,8 +5430,8 @@ featureCheck = function() {
 
       /**
        * Something isn't right - we've reached init, but the soundManager url property has not been set.
-       * admin has not called setup({url: ...}), or has not set soundManager.url (legacy use case) directly before init time.
-       * Notify and exit. If admin calls setup() with a url: property, init will be restarted as in the deferred loading case.
+       * User has not called setup({url: ...}), or has not set soundManager.url (legacy use case) directly before init time.
+       * Notify and exit. If user calls setup() with a url: property, init will be restarted as in the deferred loading case.
        */
 
        _wDS('noURL');
@@ -5587,7 +5587,7 @@ featureCheck = function() {
 
           } else {
 
-            // no custom flash block handling, but SWF has timed out. Will recover if admin unblocks / allows SWF load.
+            // no custom flash block handling, but SWF has timed out. Will recover if user unblocks / allows SWF load.
 
             if (!sm2.useFlashBlock && canIgnoreFlash) {
 
@@ -5706,7 +5706,7 @@ featureCheck = function() {
       // all good.
       _wDS('sm2Loaded', 1);
       didInit = true;
-      initadminOnload();
+      initUserOnload();
       debugTS('onload', true);
       return true;
     }
@@ -5738,14 +5738,14 @@ featureCheck = function() {
     if (!disabled) {
       if (sm2.waitForWindowLoad && !windowLoaded) {
         _wDS('waitOnload');
-        event.add(window, 'load', initadminOnload);
+        event.add(window, 'load', initUserOnload);
       } else {
         // <d>
         if (sm2.waitForWindowLoad && windowLoaded) {
           _wDS('docLoaded');
         }
         // </d>
-        initadminOnload();
+        initUserOnload();
       }
     }
 
@@ -5818,7 +5818,7 @@ featureCheck = function() {
       // attempt to talk to Flash
       flash._externalInterfaceTest(false);
 
-      // apply admin-specified polling interval, OR, if "high performance" set, faster vs. default polling
+      // apply user-specified polling interval, OR, if "high performance" set, faster vs. default polling
       // (determines frequency of whileloading/whileplaying callbacks, effectively driving UI framerates)
       setPolling(true, (sm2.flashPollingInterval || (sm2.useHighPerformance ? 10 : 50)));
 

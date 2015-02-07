@@ -1,7 +1,12 @@
 class EpisodesController < ApplicationController
   
   def index
-    @episodes = Episode.all
+    type = params[:type]
+    if type == 'vita'
+      @episodes = Episode.where(type: 'vita')
+    else
+      @episodes = Episode.where(type: 'SFNAPCPS')
+    end        
   end
 
   def show
@@ -21,7 +26,7 @@ class EpisodesController < ApplicationController
     @episodes = Episode.new(episode_params)
 
       if @episode.save
-        redirect_to episode_path
+        redirect_to episode_path, notice:"#{episode.title} was submitted successfully!"
       else
         render :new
       end
@@ -46,7 +51,7 @@ class EpisodesController < ApplicationController
   protected
   #need to add file column name
   def episode_params
-    params.require(:episode).permit(:title, :description, :runtime_in_minutes, :poster_image_url, :release_date)
+    params.require(:episode).permit(:title, :description, :runtime_in_minutes, :poster_image_url, :release_date, :type)
   end
 
   def admin_params
