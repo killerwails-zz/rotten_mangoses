@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206214055) do
+ActiveRecord::Schema.define(version: 20150207004747) do
 
   create_table "add_attachment_to_episodes", force: true do |t|
     t.string   "avatar_file_name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150206214055) do
     t.datetime "track_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "podcast_type"
   end
 
   add_index "episodes", ["user_id"], name: "index_episodes_on_user_id"

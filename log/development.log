@@ -1,0 +1,26 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to AddTypeToEpisodes (20150207004747)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "aepisodes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "title" varchar(255), "description" text, "runtime_in_minutes" integer, "release_date" datetime, "avatar_file_name" varchar(255), "avatar_content_type" varchar(255), "avatar_file_size" integer, "avatar_updated_at" datetime, "track_file_name" varchar(255), "track_content_type" varchar(255), "track_file_size" integer, "track_updated_at" datetime, "created_at" datetime, "updated_at" datetime, "type" varchar(255)) 
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "tindex_aepisodes_on_user_id" ON "aepisodes" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "episodes"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "episodes"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "episodes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "title" varchar(255), "description" text, "runtime_in_minutes" integer, "release_date" datetime, "avatar_file_name" varchar(255), "avatar_content_type" varchar(255), "avatar_file_size" integer, "avatar_updated_at" datetime, "track_file_name" varchar(255), "track_content_type" varchar(255), "track_file_size" integer, "track_updated_at" datetime, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_episodes_on_user_id" ON "episodes" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "aepisodes"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "aepisodes"[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20150207004747'
+  [1m[36m (8.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddTypeToEpisodes (20150207004747)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "episodes" ADD "podcast_type" varchar(255)[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150207004747"]]
+  [1m[36m (11.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
