@@ -1,8 +1,12 @@
 class EpisodesController < ApplicationController
   
   def index
-    if
-    @episodes = Episode.all
+    type = params[:type]
+    if type == 'vita'
+      @episodes = Episode.where(type: 'vita')
+    else
+      @episodes = Episode.where(type: 'SFNAPCPS')
+    end        
   end
 
   def show
