@@ -13,6 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20150205075817) do
 
+  create_table "add_type_to_episodes", force: true
+    t.string  "type"
+  end
+
+
   create_table "add_attachment_to_episodes", force: true do |t|
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
